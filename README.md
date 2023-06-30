@@ -1,6 +1,6 @@
 # MOplot
 
-MOplot_MOproblems is a simple python script to plot and annotate molecular orbital energy diagrams from a csv file. It is meant to offer some improvements over alternative scripts, which may not annotate points. 
+MOplos-MOproblems is a simple python script to plot and annotate molecular orbital energy diagrams from a csv file. It is meant to offer some improvements over alternative scripts, which may not annotate points. 
     
 Copyright (C) 2023  Samuel Smith
 
