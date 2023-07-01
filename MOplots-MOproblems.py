@@ -82,13 +82,13 @@ def plotMO_swarm(data_path, degen, size, figsize, textX):
 
 def check_degen(array, degen):
     """check_degen:
-    Given an array of values, check how many previous entries are within some tolerance of it. Return an array of integers with the same length as the input array.
+    Given an array of values, check how many previous entries are within some tolerance of it and precede it by less than 4 places. Return an array of integers with the same length as the input array.
     """
     degen = degen
     degen_array = np.zeros(len(array), dtype=int)
     for i in range(0, len(array)):
         for j in range(0, i):
-            if abs(array[i] - array[j]) < degen:
+            if (abs(array[i] - array[j]) < degen) and i - j < 4:
                 degen_array[i] += 1
     return degen_array
 
@@ -103,11 +103,11 @@ def plotMO_cat(data_path, degen, size, figsize, textX):
     sns.set_theme(style='ticks', context='paper')
     fig, ax = plt.subplots(figsize=figsize)
     ax.grid(axis='y')
-    degen = degen
+    #degen = degen
 
     # Define variables
     dataset = pd.read_csv(data_path)
-    orbital_num = dataset.loc[:, "orbital_num"]
+    #orbital_num = dataset.loc[:, "orbital_num"]
     compound = dataset.loc[:, "compound"]
     eV = dataset.loc[:, "eV"]
     symmetry_label = dataset.loc[:, "symmetry_label"]
@@ -133,29 +133,28 @@ def plotMO_cat(data_path, degen, size, figsize, textX):
     # Define offsets for labels, based on textX:
     textX = float(textX)
     # produce the variables offD3, offD2, offD, offset without explicitly casting them as floats:
-    offD3 = (10*textX, 0)
-    offD2 = (8*textX, 0)
-    offD = (6*textX, 0)
-    offset = (4*textX, 0)
+    offD3 = (8*textX, 0)
+    offD2 = (6*textX, 0)
+    offD = (4*textX, 0)
+    offset = (2*textX, 0)
 
-    print(len(compound))
+    degen_num = check_degen(eV, degen)
 
     for i in range(0, len(compound)):
-        degen_num = check_degen(eV, degen)
         if degen_num[i] == 0:
             # Annotate non-degenerate points with an offset of offset
             ax.annotate(symmetry_label[i], xy=(compound[i], eV[i]), xytext=offset, size=size,
                         ha="center", va="top", textcoords="offset points")
         elif degen_num[i] == 1:
-            # Annotate doubly degenerate points with an offset of (60, 0)
+            # Annotate degenerate points with an offset of offD
             ax.annotate(symmetry_label[i], xy=(compound[i], eV[i]), xytext=offD, size=size,
                         ha="center", va="top", textcoords="offset points")
         elif degen_num[i] == 2:
-            # Annotate triply degenerate points with an offset of (80, 0)
+            # Annotate doubly degenerate points with an offset of offD2
             ax.annotate(symmetry_label[i], xy=(compound[i], eV[i]), xytext=offD2, size=size,
                         ha="center", va="top", textcoords="offset points")
         elif degen_num[i] == 3:
-            # Annotate triply degenerate points with an offset of (100, 0)
+            # Annotate triply degenerate points with an offset of offD3
             ax.annotate(symmetry_label[i], xy=(compound[i], eV[i]), xytext=offD3, size=size,
                         ha="center", va="top", textcoords="offset points")
         else:
@@ -166,8 +165,8 @@ def plotMO_cat(data_path, degen, size, figsize, textX):
 
 
 data_path = get_path()
-degen = 0.03
+degen = 0.015
 size = 10
 figsize = (6, 4)
-textX = 10
+textX = 15
 plotMO_cat(data_path, degen, size, figsize, textX)
