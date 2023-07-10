@@ -93,7 +93,7 @@ def check_degen(array, degen):
     return degen_array
 
 
-def plotMO_cat(data_path, degen, size, figsize, textX):
+def plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width):
     """PlotMO:
     Given a path to a formatted molecular orbital list with labels, plot molecular orbitals.
 
@@ -115,9 +115,9 @@ def plotMO_cat(data_path, degen, size, figsize, textX):
     # Plot data
     sns.stripplot(data=dataset, x='compound', y='eV',
                   marker='_',
-                  linewidth=1,
+                  linewidth=line_width, # width of markers
                   zorder=3,
-                  s=20,
+                  s=marker_size, # size of markers
                   hue='orbital_label',
                   edgecolor='face',
                   palette='rocket',
@@ -133,10 +133,15 @@ def plotMO_cat(data_path, degen, size, figsize, textX):
     # Define offsets for labels, based on textX:
     textX = float(textX)
     # produce the variables offD3, offD2, offD, offset without explicitly casting them as floats:
-    offD3 = (8*textX, 0)
-    offD2 = (6*textX, 0)
-    offD = (4*textX, 0)
-    offset = (2*textX, 0)
+    #offD3 = (8*textX, 0)
+    #offD2 = (6*textX, 0)
+    #offD = (4*textX, 0)
+    #offset = (2*textX, 0)
+    
+    offD3 = (0.5 * marker_size + 8*textX, 0)
+    offD2 = (0.5 * marker_size + 6*textX, 0)
+    offD = (0.5 * marker_size + 4*textX, 0)
+    offset = (0.5 * marker_size + 2*textX, 0)
 
     degen_num = check_degen(eV, degen)
 
@@ -164,9 +169,11 @@ def plotMO_cat(data_path, degen, size, figsize, textX):
     plt.show()
 
 
-data_path = get_path()
-degen = 0.015
-size = 10
-figsize = (6, 4)
-textX = 15
-plotMO_cat(data_path, degen, size, figsize, textX)
+data_path = get_path() # path to data file
+degen = 0.05 # degeneracy tolerance
+size = 11 # size of labels
+figsize = (6.3, 4.5) # size of figure
+textX = 11 # offset of labels
+marker_size = 20 # size of markers
+line_width = 3 # width of markers
+plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width)

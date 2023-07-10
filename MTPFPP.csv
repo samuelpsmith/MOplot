@@ -19,11 +19,7 @@ PtTPFPP,-5.682,-5.68,$d_{xz}$,homo-1,248
 PtTPFPP,-5.682,-5.68,$d_{yz}$,homo,249
 PtTPFPP,-3.397,-3.4,$E_{g}$,lumo,250
 PtTPFPP,-3.397,-3.4,$E_{g}$,lumo+1,251
-PtTPFPP,-2.156,-2.16,$ligand$,lumo+2,252
-ZnTPFPP,-6.461,-6.46,$ligand$,homo-3,243
-ZnTPFPP,-6.456,-6.46,$ligand$,homo-2,244
 ZnTPFPP,-5.488,-5.49,$A_{1u}$,homo-1,245
 ZnTPFPP,-5.313,-5.31,$A_{2u}$,homo,246
 ZnTPFPP,-3.31,-3.31,$E_{g}$,lumo,247
 ZnTPFPP,-3.31,-3.31,$E_{g}$,lumo+1,248
-ZnTPFPP,-2.059,-2.06,$ligand$,lumo+2,249

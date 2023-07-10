@@ -19,11 +19,7 @@ PtTPP,-5.43,-5.43,$d_{xz}$,homo-1,168
 PtTPP,-5.179,-5.18,$A_{2u}$,homo,169
 PtTPP,-3.037,-3.04,$E_{g}$,lumo,170
 PtTPP,-3.037,-3.04,$E_{g}$,lumo+1,171
-PtTPP,-1.772,-1.77,$ligand$,lumo+2,172
-ZnTPP,-6.182,-6.18,$ligand$,homo-3,163
-ZnTPP,-6.176,-6.18,$ligand$,homo-2,164
 ZnTPP,-5.218,-5.22,$A_{1u}$,homo-1,165
 ZnTPP,-4.828,-4.83,$A_{2u}$,homo,166
 ZnTPP,-2.95,-2.95,$E_{g}$,lumo,167
 ZnTPP,-2.949,-2.95,$E_{g}$,lumo+1,168
-ZnTPP,-1.672,-1.67,$label$,lumo+2,169
