@@ -1,25 +1,25 @@
 ﻿compound,unround_eV,eV,symmetry_label,orbital_label,orbital_num
+ZnTPP,-5.218,-5.22,$A_{1u}$,homo-1,165
+ZnTPP,-4.828,-4.83,$A_{2u}$,homo,166
+ZnTPP,-2.95,-2.95,$E_{gx}$,lumo,167
+ZnTPP,-2.949,-2.95,$E_{gy}$,lumo+1,168
 NiTPP,-5.393,-5.39,$d_{xz}$,homo-3,166
 NiTPP,-5.309,-5.31,$A_{1u}$,homo-2,167
 NiTPP,-5.178,-5.18,$d_{z^2}$,homo-1,168
 NiTPP,-5.057,-5.06,$A_{2u}$,homo,169
 NiTPP,-3.31,-3.31,$d_{x^2 - y^2}$,lumo,170
-NiTPP,-3,-3,$E_{g}$,lumo+1,171
-NiTPP,-2.994,-2.99,$E_{g}$,lumo+2,172
+NiTPP,-3,-3,$E_{gx}$,lumo+1,171
+NiTPP,-2.994,-2.99,$E_{gy}$,lumo+2,172
 PdTPP,-5.657,-5.66,$d_{xz}$,homo-3,166
 PdTPP,-5.653,-5.65,$d_{yz}$,homo-2,167
 PdTPP,-5.411,-5.41,$A_{1u}$,homo-1,168
 PdTPP,-5.11,-5.11,$A_{2u}$,homo,169
-PdTPP,-3.059,-3.06,$E_{g}$,lumo,170
-PdTPP,-3.054,-3.05,$E_{g}$,lumo+1,171
+PdTPP,-3.059,-3.06,$E_{gx}$,lumo,170
+PdTPP,-3.054,-3.05,$E_{gy}$,lumo+1,171
 PdTPP,-2.603,-2.6,$d_{x^2 - y^2}$,lumo+2,172
 PtTPP,-5.434,-5.43,$A_{1u}$,homo-3,166
 PtTPP,-5.43,-5.43,$d_{yz}$,homo-2,167
 PtTPP,-5.43,-5.43,$d_{xz}$,homo-1,168
 PtTPP,-5.179,-5.18,$A_{2u}$,homo,169
-PtTPP,-3.037,-3.04,$E_{g}$,lumo,170
-PtTPP,-3.037,-3.04,$E_{g}$,lumo+1,171
-ZnTPP,-5.218,-5.22,$A_{1u}$,homo-1,165
-ZnTPP,-4.828,-4.83,$A_{2u}$,homo,166
-ZnTPP,-2.95,-2.95,$E_{g}$,lumo,167
-ZnTPP,-2.949,-2.95,$E_{g}$,lumo+1,168
+PtTPP,-3.037,-3.04,$E_{gx}$,lumo,170
+PtTPP,-3.037,-3.04,$E_{gy}$,lumo+1,171

@@ -13,7 +13,7 @@ def get_path():
     """get_path:
     Return the full path to the data file, regardless of where the script is run from.
     """
-    relative_path = os.path.normpath("/MTPP.csv")
+    relative_path = os.path.normpath("/MTPFPP.csv")
     head, tail = os.path.split((os.path.abspath(__file__)))
     full_path = head + relative_path
     full_path = os.path.normpath(full_path)
@@ -93,7 +93,7 @@ def check_degen(array, degen):
     return degen_array
 
 
-def plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width):
+def plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width, texty):
     """PlotMO:
     Given a path to a formatted molecular orbital list with labels, plot molecular orbitals.
 
@@ -118,9 +118,9 @@ def plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width):
                   linewidth=line_width, # width of markers
                   zorder=3,
                   s=marker_size, # size of markers
-                  hue='orbital_label',
+                  hue='symmetry_label',
                   edgecolor='face',
-                  palette='rocket',
+                  palette='flare_r',
                   ax=ax,
                   legend=False,
                   jitter=False
@@ -138,10 +138,10 @@ def plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width):
     #offD = (4*textX, 0)
     #offset = (2*textX, 0)
     
-    offD3 = (0.5 * marker_size + 8*textX, 0)
-    offD2 = (0.5 * marker_size + 6*textX, 0)
-    offD = (0.5 * marker_size + 4*textX, 0)
-    offset = (0.5 * marker_size + 2*textX, 0)
+    offD3 = (0.5 * marker_size + 8*textX, line_width + texty)
+    offD2 = (0.5 * marker_size + 6*textX, line_width + texty)
+    offD = (0.5 * marker_size + 4*textX, line_width + texty)
+    offset = (0.5 * marker_size + 2*textX, line_width + texty)
 
     degen_num = check_degen(eV, degen)
 
@@ -172,8 +172,9 @@ def plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width):
 data_path = get_path() # path to data file
 degen = 0.05 # degeneracy tolerance
 size = 11 # size of labels
-figsize = (6.3, 4.5) # size of figure
-textX = 11 # offset of labels
+figsize = (6.5, 4.5) # size of figure
+textX = 11 # multiple for x offset of labels
+texty = 2 #y offset of labels added to marker hight
 marker_size = 20 # size of markers
 line_width = 3 # width of markers
-plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width)
+plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width, texty)
