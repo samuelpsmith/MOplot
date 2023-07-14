@@ -13,7 +13,7 @@ def get_path():
     """get_path:
     Return the full path to the data file, regardless of where the script is run from.
     """
-    relative_path = os.path.normpath("/MTPFPP.csv")
+    relative_path = os.path.normpath("/MTPP.csv")
     head, tail = os.path.split((os.path.abspath(__file__)))
     full_path = head + relative_path
     full_path = os.path.normpath(full_path)
@@ -126,6 +126,8 @@ def plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width, 
                   jitter=False
                   # dodge=True
                   )
+    
+
     ax.set(xlabel=None)
 
     # Plot labels and fix labels of degenerate energy levels
@@ -164,6 +166,12 @@ def plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width, 
                         ha="center", va="top", textcoords="offset points")
         else:
             print("Error: check_degen() returned a value greater than 3.")
+
+    # change axis label size using plt.xlabel
+    #plt.xlabel('Compound', fontsize=14)
+    plt.ylabel('eV', fontsize=14)
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=12)
 
     sns.despine()
     plt.show()
