@@ -2,7 +2,7 @@
 
 MOplos-MOproblems is a simple python script to plot and annotate molecular orbital energy diagrams from a csv file. It is meant to offer some improvements over alternative scripts, which may not annotate points. 
 
-![example image: MTPP molecular orbital energy diagrams]([http://url/to/img.png](https://github.com/samuelpsmith/MOplot/blob/main/MTPP_example.png))
+![example image: MTPP molecular orbital energy diagrams](https://github.com/samuelpsmith/MOplot/blob/main/MTPP_example.png)
     
 Copyright (C) 2023  Samuel Smith
 
