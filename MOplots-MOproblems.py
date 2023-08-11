@@ -13,14 +13,14 @@ def get_path():
     """get_path:
     Return the full path to the data file, regardless of where the script is run from.
     """
-    relative_path = os.path.normpath("/MTPP.csv")
+    relative_path = os.path.normpath("/MTPFPP.csv")
     head, tail = os.path.split((os.path.abspath(__file__)))
     full_path = head + relative_path
     full_path = os.path.normpath(full_path)
     return full_path
 
 
-def plotMO_swarm(data_path, degen, size, figsize, textX):
+def plotMO_swarm(data_path, degen, size, figsize, textX, marker_size, line_width, texty):
     """PlotMO:
     Given a path to a formatted molecular orbital list with labels, plot molecular orbitals. Use Seaborn's swarmplot to reduce overlapping plotting.
 
@@ -39,40 +39,62 @@ def plotMO_swarm(data_path, degen, size, figsize, textX):
     eV = dataset.loc[:, "eV"]
     symmetry_label = dataset.loc[:, "symmetry_label"]
 
+    #Apply a small vertical offset to the data points to avoid overlapping points
+    #dataset['eV'] = dataset['eV'] + np.random.uniform(-0.1, 0.1, len(dataset))
+
     # Plot data
     sns.swarmplot(data=dataset, x='compound', y='eV',
                   marker='_',
-                  linewidth=1,
+                  linewidth=line_width, # width of markers
                   zorder=3,
-                  s=20,
-                  hue='orbital_label',
+                  s=marker_size, # size of markers
+                  hue='symmetry_label',
                   edgecolor='face',
-                  palette='rocket',
+                  palette='flare_r',
                   ax=ax,
                   legend=False,
-                  # dodge=True
+                  dodge=False
                   )
     ax.set(xlabel=None)
 
-    # for each entry in an array, check how many previous entries are within degen of it
+    # Plot labels and fix labels of degenerate energy levels
+
+    # Define offsets for labels, based on textX:
+    textX = float(textX)
+    # produce the variables offD3, offD2, offD, offset without explicitly casting them as floats:
+    #offD3 = (8*textX, 0)
+    #offD2 = (6*textX, 0)
+    #offD = (4*textX, 0)
+    #offset = (2*textX, 0)
+    
+    offD3 = (0.5 * marker_size + 8*textX, line_width + texty)
+    offD2 = (0.5 * marker_size + 6*textX, line_width + texty)
+    offD = (0.5 * marker_size + 4*textX, line_width + texty)
+    offset = (0.5 * marker_size + 2*textX, line_width + texty)
+
+    degen_num = check_degen(eV, degen)
+
+
     for i in range(0, len(compound)):
-        degen_num = check_degen(eV, degen)
         if degen_num[i] == 0:
-            # Annotate non-degenerate points with an offset of (40, 0)
-            ax.annotate(symmetry_label[i], xy=(compound[i], eV[i]), xytext=(40, 0), size=size,
+            # Annotate non-degenerate points with an offset of offset
+            ax.annotate(symmetry_label[i], xy=(compound[i], eV[i]), xytext=offset, size=size,
                         ha="center", va="top", textcoords="offset points")
         elif degen_num[i] == 1:
-            # Annotate doubly degenerate points with an offset of (60, 0)
-            ax.annotate(symmetry_label[i], xy=(compound[i], eV[i]), xytext=(60, 0), size=size,
+            # Annotate degenerate points with an offset of offD
+            ax.annotate(symmetry_label[i], xy=(compound[i], eV[i]), xytext=offD, size=size,
                         ha="center", va="top", textcoords="offset points")
         elif degen_num[i] == 2:
-            # Annotate triply degenerate points with an offset of (80, 0)
-            ax.annotate(symmetry_label[i], xy=(compound[i], eV[i]), xytext=(80, 0), size=size,
+            # Annotate doubly degenerate points with an offset of offD2
+            ax.annotate(symmetry_label[i], xy=(compound[i], eV[i]), xytext=offD2, size=size,
                         ha="center", va="top", textcoords="offset points")
         elif degen_num[i] == 3:
-            # Annotate triply degenerate points with an offset of (100, 0)
-            ax.annotate(symmetry_label[i], xy=(compound[i], eV[i]), xytext=(100, 0), size=size,
+            # Annotate triply degenerate points with an offset of offD3
+            ax.annotate(symmetry_label[i], xy=(compound[i], eV[i]), xytext=offD3, size=size,
                         ha="center", va="top", textcoords="offset points")
+        else:
+            print("Error: check_degen() returned a value greater than 3.")
+
 
     sns.despine()
     plt.show()
@@ -84,6 +106,8 @@ def check_degen(array, degen):
     """check_degen:
     Given an array of values, check how many previous entries are within some tolerance of it and precede it by less than 4 places. Return an array of integers with the same length as the input array.
     """
+    # consider changing this so that only things with the same x axis coordinate are considered degenerate
+    
     degen = degen
     degen_array = np.zeros(len(array), dtype=int)
     for i in range(0, len(array)):
@@ -93,7 +117,7 @@ def check_degen(array, degen):
     return degen_array
 
 
-def plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width, texty):
+def plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width, texty, vertical_jitter):
     """PlotMO:
     Given a path to a formatted molecular orbital list with labels, plot molecular orbitals.
 
@@ -112,6 +136,17 @@ def plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width, 
     eV = dataset.loc[:, "eV"]
     symmetry_label = dataset.loc[:, "symmetry_label"]
 
+    #Apply a small vertical offset to the data points to avoid overlapping points
+    np.random.seed(2)
+    degen_num = check_degen(eV, degen)
+    for i in range(0, len(compound)):
+        if degen_num[i] > 0:
+            # Apply small vetical offset to degenerate points\
+            dataset['eV'][i] = dataset['eV'][i] + np.random.uniform(-vertical_jitter, vertical_jitter, 1)
+            
+    #dataset['eV'] = dataset['eV'] + np.random.uniform(-0.1, 0.1, len(dataset))
+      
+
     # Plot data
     sns.stripplot(data=dataset, x='compound', y='eV',
                   marker='_',
@@ -123,8 +158,8 @@ def plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width, 
                   palette='flare_r',
                   ax=ax,
                   legend=False,
-                  jitter=False
-                  # dodge=True
+                  jitter=False,
+                  dodge=False
                   )
     
 
@@ -185,4 +220,6 @@ textX = 11 # multiple for x offset of labels
 texty = 2 #y offset of labels added to marker hight
 marker_size = 20 # size of markers
 line_width = 3 # width of markers
-plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width, texty)
+vertical_jitter = 0.075 # amount of vertical jitter applied to degenerate points
+plotMO_cat(data_path, degen, size, figsize, textX, marker_size, line_width, texty, vertical_jitter)
+#plotMO_swarm(data_path, degen, size, figsize, textX, marker_size, line_width, texty)
