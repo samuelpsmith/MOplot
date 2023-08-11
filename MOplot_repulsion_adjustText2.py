@@ -1,4 +1,5 @@
 # Import modules
+# %%
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
@@ -9,17 +10,15 @@ from adjustText import adjust_text
 
 def main():
     data_path = get_path("/MTPFPP.csv")  # path to data file
-    degen = 0.05  # degeneracy tolerance
+    degen = 0.055  # degeneracy tolerance
     size = 11  # size of labels
     figsize = (6.5, 4.5)  # size of figure
     textX = 15  # multiple for x offset of labels
     texty = 2  # y offset of labels added to marker hight
     marker_size = 20  # size of markers
     line_width = 3  # width of markers
-    vertical_jitter = (
-        0.025  # 5 # amount of vertical jitter applied to degenerate points
-    )
-    use_adjust_text = False  # use adjust_text() to avoid overlapping labels
+    vertical_jitter = 0.25  # 5 # amount of vertical jitter applied to degenerate points
+    use_adjust_text = False # use adjust_text() to avoid overlapping labels
     plotMO_cat(
         data_path,
         degen,
@@ -148,11 +147,10 @@ def plotMO_cat(
     sns.set_theme(style="ticks", context="paper")
     fig, ax = plt.subplots(figsize=figsize)
     ax.grid(axis="y")
-    # degen = degen
 
     # Define variables
     dataset = pd.read_csv(data_path)
-    # orbital_num = dataset.loc[:, "orbital_num"]
+    orbital_num = dataset.loc[:, "orbital_num"]
     compound = dataset.loc[:, "compound"]
     eV = dataset.loc[:, "eV"]
     symmetry_label = dataset.loc[:, "symmetry_label"]
@@ -167,22 +165,20 @@ def plotMO_cat(
         elif degen_num[i] == 1:
             # Annotate degenerate points with an offset of offD
             dataset["eV"][i] = dataset["eV"][i] + np.random.uniform(
-                -vertical_jitter, vertical_jitter, 1
+                0, vertical_jitter, 1
             )
         elif degen_num[i] == 2:
             # Annotate doubly degenerate points with an offset of offD2
-            dataset["eV"][i] = dataset["eV"][i] + 1.05 * np.random.uniform(
-                -vertical_jitter, vertical_jitter, 1
+            dataset["eV"][i] = dataset["eV"][i] + 1.25 * np.random.uniform(
+                0, vertical_jitter, 1
             )
         elif degen_num[i] == 3:
             # Annotate triply degenerate points with an offset of offD3
-            dataset["eV"][i] = dataset["eV"][i] + 1.10 * np.random.uniform(
-                -vertical_jitter, vertical_jitter, 1
+            dataset["eV"][i] = dataset["eV"][i] + 1.5 * np.random.uniform(
+                0, vertical_jitter, 1
             )
         else:
             print("Error: check_degen() returned a value greater than 3.")
-
-    # dataset['eV'] = dataset['eV'] + np.random.uniform(-0.1, 0.1, len(dataset))
 
     # Plot data
     sns.stripplot(
@@ -223,7 +219,6 @@ def plotMO_cat(
     unique_compounds = dataset["compound"].unique()
     # Recreate the compound_to_x mapping
     compound_to_x = {compound: i for i, compound in enumerate(unique_compounds)}
-    print(compound_to_x)
     # Use the mapping to get numeric x-values for each compound in the dataset
     compound_numeric = [compound_to_x[comp] for comp in compound]
 
@@ -233,10 +228,8 @@ def plotMO_cat(
 
     for i in range(0, len(compound)):
         x = compound_to_x[compound[i]]  # retrieve the numeric x position
-        print(x)
         y = eV[i]  # original y position
         label = symmetry_label[i]  # the label text
-        print(label)
         # offset = None  # placeholder for the chosen offset
 
         # Assign offsets based on degeneracy
@@ -254,7 +247,6 @@ def plotMO_cat(
         # Calculate the new x and y positions using the offsets
         new_x = x + offset[0]
         new_y = y + offset[1]
-        print(new_x, new_y)
 
         # Use ax.text to add the text at the new position
         text = ax.text(new_x, new_y, label, size=size, ha="center", va="top")
@@ -267,18 +259,20 @@ def plotMO_cat(
             texts,
             x=[t.get_position()[0] for t in texts],
             y=[t.get_position()[1] for t in texts],
-            force_text=(0.1, 0.2),
-            force_static=(0.1, 0.2),
-            force_pull=(0.05, 0.01),
-            force_explode=(0.01, 0.02),
-            expand=(1.05, 1.1),
+            force_text=(0.001, 0.001),
+            force_static=(0.001, 0.001),
+            force_pull=(0.001, 0.005),
+            force_explode=(0.001, 0.001),
+            #explode_radius=(15),
+            expand=(1.1, 1.1),
             ensure_inside_axes=True,
             ax=ax,
             avoid_self=False,
-            only_move={"static": "x", "text": "y"},
+            #only_move={"static": "x", "text": "x", "explode": "x", "pull": "x"},
+            #only_move={"static": "y", "text": "y", "explode": "y", "pull": "y"},
             expand_axes=True,
+            #time_lim = 0.1
         )
-
 
     plt.ylabel("eV", fontsize=14)
     plt.xticks(fontsize=12)
@@ -289,3 +283,5 @@ def plotMO_cat(
 
 
 main()
+
+# %%
