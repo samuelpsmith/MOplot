@@ -9,15 +9,15 @@ from adjustText import adjust_text
 
 
 def main():
-    data_path = get_path("/MTPFPP.csv")  # path to data file
+    data_path = get_path("/test_fig.csv")  # path to data file
     degen = 0.055  # degeneracy tolerance
-    size = 11  # size of labels
+    size = 20  # size of labels
     figsize = (6.5, 4.5)  # size of figure
-    textX = 15  # multiple for x offset of labels
-    texty = 2  # y offset of labels added to marker hight
-    marker_size = 20  # size of markers
-    line_width = 3  # width of markers
-    vertical_jitter = 0.25  # 5 # amount of vertical jitter applied to degenerate points
+    textX = 30  # multiple for x offset of labels
+    texty = 5  # y offset of labels added to marker hight
+    marker_size = 40  # size of markers
+    line_width = 8  # width of markers
+    vertical_jitter = 0.0  # 5 # amount of vertical jitter applied to degenerate points
     use_adjust_text = False # use adjust_text() to avoid overlapping labels
     plotMO_cat(
         data_path,
@@ -144,7 +144,7 @@ def plotMO_cat(
     """
 
     # Set theme and define figure size.
-    sns.set_theme(style="ticks", context="paper")
+    sns.set_theme(style="ticks", context="poster", font_scale=1)
     fig, ax = plt.subplots(figsize=figsize)
     ax.grid(axis="y")
 
@@ -198,7 +198,7 @@ def plotMO_cat(
         dodge=False,
     )
 
-    ax.set(xlabel=None)
+    
 
     # Plot labels and fix labels of degenerate energy levels
     # Define offsets for labels, based on textX:
@@ -249,7 +249,7 @@ def plotMO_cat(
         new_y = y + offset[1]
 
         # Use ax.text to add the text at the new position
-        text = ax.text(new_x, new_y, label, size=size, ha="center", va="top")
+        text = ax.text(new_x, new_y, label, size=size, ha="center", va="top", fontstyle="oblique", zorder=4)
 
         if use_adjust_text:
             texts.append(text)
@@ -274,9 +274,13 @@ def plotMO_cat(
             #time_lim = 0.1
         )
 
-    plt.ylabel("eV", fontsize=14)
-    plt.xticks(fontsize=12)
-    plt.yticks(fontsize=12)
+    #plt.ylabel("eV", fontsize=14)
+    #plt.xticks(fontsize=12)
+    #plt.yticks(fontsize=12)
+
+    ax.set(xlabel=None)
+    plt.ylabel("eV")
+
 
     sns.despine()
     plt.show()
