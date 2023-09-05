@@ -1,0 +1,7 @@
+compound,unround_eV,eV,symmetry_label,orbital_label,orbital_num
+[ZnCis],-6.3643,-6.36,,HOMO-2,203
+[ZnCis],-5.4004,-5.4,,HOMO-1,204
+[ZnCis],-5.1613,-5.16,,HOMO,205
+[ZnCis],-3.1948,-3.19,,LUMO,206
+[ZnCis],-3.1892,-3.19,,LUMO+1,207
+[ZnCis],-1.9286,-1.93,,LUMO+2,208

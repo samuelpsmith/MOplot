@@ -1,6 +1,7 @@
 # Import modules
 # %%
 import seaborn as sns
+import json
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -8,28 +9,25 @@ import os
 from adjustText import adjust_text
 
 
+def load_settings(file_path):
+    with open(file_path, "r") as f:
+        return json.load(f)
+
+
 def main():
-    data_path = get_path("/test_fig.csv")  # path to data file
-    degen = 0.055  # degeneracy tolerance
-    size = 20  # size of labels
-    figsize = (6.5, 4.5)  # size of figure
-    textX = 30  # multiple for x offset of labels
-    texty = 5  # y offset of labels added to marker hight
-    marker_size = 40  # size of markers
-    line_width = 8  # width of markers
-    vertical_jitter = 0.0  # 5 # amount of vertical jitter applied to degenerate points
-    use_adjust_text = False # use adjust_text() to avoid overlapping labels
+    settings = load_settings("settings.json")
+
     plotMO_cat(
-        data_path,
-        degen,
-        size,
-        figsize,
-        textX,
-        marker_size,
-        line_width,
-        texty,
-        vertical_jitter,
-        use_adjust_text,
+        get_path(settings["data_path"]),
+        settings["degen"],
+        settings["size"],
+        tuple(settings["figsize"]),
+        settings["textX"],
+        settings["marker_size"],
+        settings["line_width"],
+        settings["texty"],
+        settings["vertical_jitter"],
+        settings["use_adjust_text"],
     )
 
 
@@ -144,13 +142,16 @@ def plotMO_cat(
     """
 
     # Set theme and define figure size.
-    sns.set_theme(style="ticks", context="poster", font_scale=1)
+    sns.set_theme(
+        style="ticks", context="notebook", font_scale=1
+    )  # change this so that you can use different settings
     fig, ax = plt.subplots(figsize=figsize)
     ax.grid(axis="y")
 
     # Define variables
     dataset = pd.read_csv(data_path)
     orbital_num = dataset.loc[:, "orbital_num"]
+    orbital_label = dataset.loc[:, "orbital_label"]
     compound = dataset.loc[:, "compound"]
     eV = dataset.loc[:, "eV"]
     symmetry_label = dataset.loc[:, "symmetry_label"]
@@ -198,8 +199,6 @@ def plotMO_cat(
         dodge=False,
     )
 
-    
-
     # Plot labels and fix labels of degenerate energy levels
     # Define offsets for labels, based on textX:
     textX = float(textX)
@@ -229,7 +228,10 @@ def plotMO_cat(
     for i in range(0, len(compound)):
         x = compound_to_x[compound[i]]  # retrieve the numeric x position
         y = eV[i]  # original y position
-        label = symmetry_label[i]  # the label text
+        if np.isnan(symmetry_label[i]):
+            label = orbital_label[i]
+        else:
+            label = symmetry_label[i]  # the label text
         # offset = None  # placeholder for the chosen offset
 
         # Assign offsets based on degeneracy
@@ -246,10 +248,21 @@ def plotMO_cat(
 
         # Calculate the new x and y positions using the offsets
         new_x = x + offset[0]
+        print(x)
+        print(offset[0])
         new_y = y + offset[1]
 
         # Use ax.text to add the text at the new position
-        text = ax.text(new_x, new_y, label, size=size, ha="center", va="top", fontstyle="oblique", zorder=4)
+        text = ax.text(
+            new_x,
+            new_y,
+            label,
+            size=size,
+            ha="center",
+            va="top",
+            fontstyle="oblique",
+            zorder=4,
+        )
 
         if use_adjust_text:
             texts.append(text)
@@ -263,24 +276,23 @@ def plotMO_cat(
             force_static=(0.001, 0.001),
             force_pull=(0.001, 0.005),
             force_explode=(0.001, 0.001),
-            #explode_radius=(15),
+            # explode_radius=(15),
             expand=(1.1, 1.1),
             ensure_inside_axes=True,
             ax=ax,
             avoid_self=False,
-            #only_move={"static": "x", "text": "x", "explode": "x", "pull": "x"},
-            #only_move={"static": "y", "text": "y", "explode": "y", "pull": "y"},
+            # only_move={"static": "x", "text": "x", "explode": "x", "pull": "x"},
+            # only_move={"static": "y", "text": "y", "explode": "y", "pull": "y"},
             expand_axes=True,
-            #time_lim = 0.1
+            # time_lim = 0.1
         )
 
-    #plt.ylabel("eV", fontsize=14)
-    #plt.xticks(fontsize=12)
-    #plt.yticks(fontsize=12)
+    # plt.ylabel("eV", fontsize=14)
+    # plt.xticks(fontsize=12)
+    # plt.yticks(fontsize=12)
 
     ax.set(xlabel=None)
     plt.ylabel("eV")
-
 
     sns.despine()
     plt.show()

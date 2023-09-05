@@ -1,0 +1,13 @@
+{
+    "data_path": "/ZnCis.csv",
+    "degen": 0.055,
+    "size": 11,
+    "figsize": [6.5, 4.5],
+    "textX": 40,
+    "texty": 2,
+    "marker_size": 20,
+    "line_width": 3,
+    "vertical_jitter": 0.075,
+    "use_adjust_text": false
+  }
+  
