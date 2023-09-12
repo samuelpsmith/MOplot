@@ -5,17 +5,35 @@ import csv
 
 
 # Create an instance by providing the path to a Gaussian `.fchk` file
-fchk_data = Fchk("/home/user/Documents/git-local/MOplot/ZnCis_09-04-23_1.fchk", tag="some_tag")
+# rewrite this so that it takes a prefix and appends it to .fchk and adds it to the path
+compound_id = "NiTrans_09-05-23_1"  # Replace with the actual compound name
+compound_name = "NiTrans"
 
-# Access the parsed attributes
-print("Title:", fchk_data.title)
-print("Calculation type:", fchk_data.calc)
-print("Basis set:", fchk_data.basis)
-print("Number of atoms:", fchk_data.nat)
-print("Total energy:", fchk_data.total_energy)
-print("Homo:", fchk_data.ahomo)
-print("Lumo:", fchk_data.alumo)
-print("orbital energies:", fchk_data.alpha_energies)
+path = "/home/user/Documents/wheeler-local/" + compound_id + ".fchk"
+fchk_data = Fchk(path, tag="some_tag")
+csv_filename = compound_id+ ".csv"
+N_orbitals = 5
+
+
+def main(fchk_data, N_orbitals, compound_name, csv_filename):
+
+    orbitals_info = get_orbitals_around_homo_lumo(fchk_data, N_orbitals)
+    for label, info in orbitals_info.items():
+        print(f"{label}: Orbital Number = {info['orbital_number']}, Energy = {info['energy']}")
+
+    write_orbitals_to_csv(fchk_data, N_orbitals, compound_name, csv_filename)
+
+
+def print_attributes(fchk_data):
+    # Access the parsed attributes
+    print("Title:", fchk_data.title)
+    print("Calculation type:", fchk_data.calc)
+    print("Basis set:", fchk_data.basis)
+    print("Number of atoms:", fchk_data.nat)
+    print("Total energy:", fchk_data.total_energy)
+    print("Homo:", fchk_data.ahomo)
+    print("Lumo:", fchk_data.alumo)
+    print("orbital energies:", fchk_data.alpha_energies)
 
 
 def get_orbitals_around_homo_lumo(fchk_data, N_orbitals):
@@ -66,23 +84,6 @@ def write_orbitals_to_csv(fchk_data, N_orbitals, compound_name, csv_filename):
             rounded_energy = round(info['energy'], 2)
             
             # Writing each row. Skipping columns with no data
-            csvwriter.writerow([compound_name, info['energy'], rounded_energy, '', label, info['orbital_number']])
+            csvwriter.writerow([compound_name, info['energy'], rounded_energy, r'" "', label, info['orbital_number']])
 
-
-# Sample usage
-N_orbitals = 3
-fchk_data = Fchk("/home/user/Documents/git-local/MOplot/ZnCis_09-04-23_1.fchk", tag="some_tag")
-
-orbitals_info = get_orbitals_around_homo_lumo(fchk_data, N_orbitals)
-
-for label, info in orbitals_info.items():
-    print(f"{label}: Orbital Number = {info['orbital_number']}, Energy = {info['energy']}")
-
-# Sample usage
-N_orbitals = 3
-compound_name = "[ZnCis]"  # Replace with the actual compound name
-csv_filename = "ZnCis.csv"  # Name of the CSV file to write
-
-fchk_data = Fchk("/home/user/Documents/git-local/MOplot/ZnCis_09-04-23_1.fchk", tag="some_tag")
-
-write_orbitals_to_csv(fchk_data, N_orbitals, compound_name, csv_filename)
+main(fchk_data, N_orbitals, compound_name, csv_filename)

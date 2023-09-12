@@ -1,13 +1,14 @@
 {
-    "data_path": "/ZnCis.csv",
+    "data_path": "/CisTrans.csv",
     "degen": 0.055,
     "size": 11,
     "figsize": [6.5, 4.5],
-    "textX": 40,
+    "textX": 11,
     "texty": 2,
-    "marker_size": 20,
+    "marker_size": 15,
     "line_width": 3,
-    "vertical_jitter": 0.075,
-    "use_adjust_text": false
+    "vertical_jitter": 0.00,
+    "use_adjust_text": false,
+    "use_orbital_labels": false
   }
   

@@ -1,0 +1,11 @@
+compound,unround_eV,eV,symmetry_label,orbital_label,orbital_num
+NiTrans,-5.5506,-5.55,""" """,HOMO-4,204
+NiTrans,-5.5479,-5.55,""" """,HOMO-3,205
+NiTrans,-5.4485,-5.45,""" """,HOMO-2,206
+NiTrans,-5.3209,-5.32,""" """,HOMO-1,207
+NiTrans,-5.3109,-5.31,""" """,HOMO,208
+NiTrans,-3.4782,-3.48,""" """,LUMO,209
+NiTrans,-3.2459,-3.25,""" """,LUMO+1,210
+NiTrans,-3.1062,-3.11,""" """,LUMO+2,211
+NiTrans,-1.9193,-1.92,""" """,LUMO+3,212
+NiTrans,-1.4621,-1.46,""" """,LUMO+4,213

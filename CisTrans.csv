@@ -1,0 +1,43 @@
+compound,unround_eV,eV,symmetry_label,orbital_label,orbital_num
+ZnCis,-5.4004,-5.4,$a_{1u}$,HOMO-1,204
+ZnCis,-5.1613,-5.16,$a_{2u}$,HOMO,205
+ZnCis,-3.1948,-3.19,$e_{g}$,LUMO,206
+ZnCis,-3.1892,-3.19,$e_{g}$,LUMO+1,207
+ZnTrans,-5.4014,-5.4,$a_{1u}$,HOMO-1,204
+ZnTrans,-5.1607,-5.16,$a_{2u}$,HOMO,205
+ZnTrans,-3.2619,-3.26,$e_{g}$,LUMO,206
+ZnTrans,-3.1227,-3.12,$e_{g}$,LUMO+1,207
+NiCis,-5.4524,-5.45,$a_{1u}$,HOMO-2,206
+NiCis,-5.311,-5.31,$a_{2u}$,HOMO-1,207
+NiCis,-5.3023,-5.3," ",HOMO,208
+NiCis,-3.4403,-3.44," ",LUMO,209
+NiCis,-3.181,-3.18,$e_{g}$,LUMO+1,210
+NiCis,-3.172,-3.17,$e_{g}$,LUMO+2,211
+NiTrans,-5.4485,-5.45,$a_{1u}$,HOMO-2,206
+NiTrans,-5.3209,-5.32," ",HOMO-1,207
+NiTrans,-5.3109,-5.31,$a_{2u}$,HOMO,208
+NiTrans,-3.4782,-3.48," ",LUMO,209
+NiTrans,-3.2459,-3.25,$e_{g}$,LUMO+1,210
+NiTrans,-3.1062,-3.11,$e_{g}$,LUMO+2,211
+PdCis,-5.5474,-5.55,$a_{1u}$,HOMO-1,207
+PdCis,-5.3549,-5.35,$a_{2u}$,HOMO,208
+PdCis,-3.2414,-3.24,$e_{g}$,LUMO,209
+PdCis,-3.2347,-3.23,$e_{g}$,LUMO+1,210
+PdTrans,-5.5535,-5.55,$a_{1u}$,HOMO-1,207
+PdTrans,-5.3602,-5.36,$a_{2u}$,HOMO,208
+PdTrans,-3.3104,-3.31,$e_{g}$,LUMO,209
+PdTrans,-3.1726,-3.17,$e_{g}$,LUMO+1,210
+PtCis,-5.5749,-5.57,$a_{1u}$,HOMO-3,205
+PtCis,-5.5609,-5.56," ",HOMO-2,206
+PtCis,-5.5543,-5.55," ",HOMO-1,207
+PtCis,-5.4199,-5.42,$a_{2u}$,HOMO,208
+PtCis,-3.2221,-3.22,$e_{g}$,LUMO,209
+PtCis,-3.2145,-3.21,$e_{g}$,LUMO+1,210
+PtTrans,-5.5721,-5.57,$a_{1u}$,HOMO-3,205
+PtTrans,-5.556,-5.56," ",HOMO-2,206
+PtTrans,-5.5535,-5.55," ",HOMO-1,207
+PtTrans,-5.4254,-5.43,$a_{2u}$,HOMO,208
+PtTrans,-3.2827,-3.28,$e_{g}$,LUMO,209
+PtTrans,-3.1475,-3.15,$e_{g}$,LUMO+1,210
+
+

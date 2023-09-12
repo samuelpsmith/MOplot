@@ -1,0 +1,11 @@
+compound,unround_eV,eV,symmetry_label,orbital_label,orbital_num
+NiCis,-5.5391,-5.54,""" """,HOMO-4,204
+NiCis,-5.5386,-5.54,""" """,HOMO-3,205
+NiCis,-5.4524,-5.45,""" """,HOMO-2,206
+NiCis,-5.311,-5.31,""" """,HOMO-1,207
+NiCis,-5.3023,-5.3,""" """,HOMO,208
+NiCis,-3.4403,-3.44,""" """,LUMO,209
+NiCis,-3.181,-3.18,""" """,LUMO+1,210
+NiCis,-3.172,-3.17,""" """,LUMO+2,211
+NiCis,-1.899,-1.9,""" """,LUMO+3,212
+NiCis,-1.4931,-1.49,""" """,LUMO+4,213

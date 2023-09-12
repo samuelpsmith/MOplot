@@ -1,4 +1,4 @@
-# Import modules
+
 # %%
 import seaborn as sns
 import json
@@ -8,13 +8,10 @@ import pandas as pd
 import os
 from adjustText import adjust_text
 
-
-def load_settings(file_path):
-    with open(file_path, "r") as f:
-        return json.load(f)
-
-
 def main():
+    """
+    The main function that runs the MOplot program.
+    """
     settings = load_settings("settings.json")
 
     plotMO_cat(
@@ -28,12 +25,16 @@ def main():
         settings["texty"],
         settings["vertical_jitter"],
         settings["use_adjust_text"],
+        use_orbital_labels=settings["use_orbital_labels"],
     )
 
 
 def get_path(path):
-    """get_path:
+    """
     Return the full path to the data file, regardless of where the script is run from.
+
+    :param path: The relative path to the data file.
+    :return: The full path to the data file.
     """
     relative_path = os.path.normpath(path)
     head, tail = os.path.split((os.path.abspath(__file__)))
@@ -42,9 +43,24 @@ def get_path(path):
     return full_path
 
 
+def load_settings(file_path):
+    """
+    Load the settings from a JSON file.
+
+    :param file_path: The path to the JSON file.
+    :return: The settings as a dictionary.
+    """
+    with open(file_path, "r") as f:
+        return json.load(f)
+
+
 def check_degen(array, degen):
-    """check_degen:
+    """
     Given an array of values, check how many previous entries are within some tolerance of it and precede it by less than 4 places. Return an array of integers with the same length as the input array.
+
+    :param array: The array of values to check for degeneracy.
+    :param degen: The tolerance for degeneracy.
+    :return: An array of integers with the same length as the input array.
     """
     # consider changing this so that only things with the same x axis coordinate are considered degenerate
 
@@ -93,6 +109,13 @@ def repel_annotations(ax, annotations):
 
 
 def points_to_data_x(ax, points_distance_x):
+    """
+    Convert a distance in points to a distance in data coordinates along the x-axis.
+
+    :param ax: The Axes object containing the plot.
+    :param points_distance_x: The distance in points to convert.
+    :return: The distance in data coordinates along the x-axis.
+    """
     # Transform a point at the origin to display coordinates
     disp_coord = ax.transData.transform((0, 0))
 
@@ -107,6 +130,13 @@ def points_to_data_x(ax, points_distance_x):
 
 
 def points_to_data_y(ax, points_distance_y):
+    """
+    Convert a distance in points to a distance in data coordinates along the y-axis.
+
+    :param ax: The Axes object containing the plot.
+    :param points_distance_y: The distance in points to convert.
+    :return: The distance in data coordinates along the y-axis.
+    """
     # Transform a point at the origin to display coordinates
     disp_coord = ax.transData.transform((0, 0))
 
@@ -121,6 +151,13 @@ def points_to_data_y(ax, points_distance_y):
 
 
 def points_to_data(ax, offset):
+    """
+    Convert a distance in points to a distance in data coordinates.
+
+    :param ax: The Axes object containing the plot.
+    :param offset: The distance in points to convert.
+    :return: The distance in data coordinates.
+    """
     return points_to_data_x(ax, offset[0]), points_to_data_y(ax, offset[1])
 
 
@@ -135,10 +172,22 @@ def plotMO_cat(
     texty,
     vertical_jitter,
     use_adjust_text,
+    use_orbital_labels,
 ):
-    """PlotMO:
-    Given a path to a formatted molecular orbital list with labels, plot molecular orbitals.
+    """
+    Plot molecular orbitals given a path to a formatted molecular orbital list with labels.
 
+    :param data_path: The path to the data file.
+    :param degen: The tolerance for degeneracy.
+    :param size: The size of the plot.
+    :param figsize: The size of the figure.
+    :param textX: The x-axis label.
+    :param marker_size: The size of the markers.
+    :param line_width: The width of the lines.
+    :param texty: The y-axis label.
+    :param vertical_jitter: The amount of vertical jitter to apply to the data points.
+    :param use_adjust_text: Whether to use adjustText to repel overlapping annotations.
+    :return: None
     """
 
     # Set theme and define figure size.
@@ -228,11 +277,10 @@ def plotMO_cat(
     for i in range(0, len(compound)):
         x = compound_to_x[compound[i]]  # retrieve the numeric x position
         y = eV[i]  # original y position
-        if np.isnan(symmetry_label[i]):
+        if use_orbital_labels:
             label = orbital_label[i]
         else:
             label = symmetry_label[i]  # the label text
-        # offset = None  # placeholder for the chosen offset
 
         # Assign offsets based on degeneracy
         if degen_num[i] == 0:

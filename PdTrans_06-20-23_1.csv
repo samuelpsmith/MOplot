@@ -1,0 +1,11 @@
+compound,unround_eV,eV,symmetry_label,orbital_label,orbital_num
+PdTrans,-6.0151,-6.02,,HOMO-4,204
+PdTrans,-5.7997,-5.8,,HOMO-3,205
+PdTrans,-5.7973,-5.8,,HOMO-2,206
+PdTrans,-5.5535,-5.55,,HOMO-1,207
+PdTrans,-5.3602,-5.36,,HOMO,208
+PdTrans,-3.3104,-3.31,,LUMO,209
+PdTrans,-3.1726,-3.17,,LUMO+1,210
+PdTrans,-2.7475,-2.75,,LUMO+2,211
+PdTrans,-1.9831,-1.98,,LUMO+3,212
+PdTrans,-1.4657,-1.47,,LUMO+4,213

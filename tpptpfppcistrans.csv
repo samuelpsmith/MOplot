@@ -1,0 +1,17 @@
+compound,unround_eV,eV,symmetry_label,orbital_label,orbital_num
+[Zn(TPP)],-5.218,-5.22,$a_{1u}$,homo-1,165
+[Zn(TPP)],-4.828,-4.83,$a_{2u}$,homo,166
+[Zn(TPP)],-2.95,-2.95,$e_{gx}$,lumo,167
+[Zn(TPP)],-2.949,-2.95,$e_{gy}$,lumo+1,168
+ZnTrans,-5.4014,-5.4,$a_{1u}$,HOMO-1,204
+ZnTrans,-5.1607,-5.16,$a_{2u}$,HOMO,205
+ZnTrans,-3.2619,-3.26,$e_{g}$,LUMO,206
+ZnTrans,-3.1227,-3.12,$e_{g}$,LUMO+1,207
+ZnCis,-5.4004,-5.4,$a_{1u}$,HOMO-1,204
+ZnCis,-5.1613,-5.16,$a_{2u}$,HOMO,205
+ZnCis,-3.1948,-3.19,$e_{g}$,LUMO,206
+ZnCis,-3.1892,-3.19,$e_{g}$,LUMO+1,207
+[Zn(TPFPP)],-5.488,-5.49,$a_{1u}$,homo-1,245
+[Zn(TPFPP)],-5.313,-5.31,$a_{2u}$,homo,246
+[Zn(TPFPP)],-3.31,-3.31,$e_{gx}$,lumo,247
+[Zn(TPFPP)],-3.31,-3.31,$e_{gy}$,lumo+1,248

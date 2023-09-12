@@ -1,0 +1,7 @@
+compound,unround_eV,eV,symmetry_label,orbital_label,orbital_num
+[ZnTrans],-6.383,-6.38,,HOMO-2,203
+[ZnTrans],-5.4014,-5.4,,HOMO-1,204
+[ZnTrans],-5.1607,-5.16,,HOMO,205
+[ZnTrans],-3.2619,-3.26,,LUMO,206
+[ZnTrans],-3.1227,-3.12,,LUMO+1,207
+[ZnTrans],-1.9362,-1.94,,LUMO+2,208

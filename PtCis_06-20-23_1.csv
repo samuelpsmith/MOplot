@@ -1,0 +1,11 @@
+compound,unround_eV,eV,symmetry_label,orbital_label,orbital_num
+PtCis,-5.9284,-5.93,,HOMO-4,204
+PtCis,-5.5749,-5.57,,HOMO-3,205
+PtCis,-5.5609,-5.56,,HOMO-2,206
+PtCis,-5.5543,-5.55,,HOMO-1,207
+PtCis,-5.4199,-5.42,,HOMO,208
+PtCis,-3.2221,-3.22,,LUMO,209
+PtCis,-3.2145,-3.21,,LUMO+1,210
+PtCis,-1.9681,-1.97,,LUMO+2,211
+PtCis,-1.501,-1.5,,LUMO+3,212
+PtCis,-1.4248,-1.42,,LUMO+4,213
